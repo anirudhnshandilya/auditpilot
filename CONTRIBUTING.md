@@ -95,3 +95,28 @@ git commit -m "Add risk register validation"
 Open a GitHub Issue if you'd like to discuss an idea before implementing it.
 
 Thank you for helping improve AuditPilot.
+
+## 🤝 Looking for Contributors
+
+AuditPilot is in its early stages, and we're looking for contributors interested in building an open-source security compliance platform.
+
+We're especially looking for experience in:
+
+- 🛡️ Governance, Risk & Compliance (ISO 27001, NIST CSF, CIS Controls, SOC 2)
+- 🤖 AI / Machine Learning / NLP (LLMs, RAG, document analysis)
+- 🐍 Python & FastAPI
+- ⚛️ React & TypeScript
+- 🗄️ PostgreSQL
+- ☁️ DevOps / Docker / CI/CD
+- 🧪 Testing & Quality Engineering
+- 📖 Technical Documentation
+
+Whether you're fixing bugs, improving documentation, building new features, or helping shape the architecture, your contributions are welcome.
+
+Please read **CONTRIBUTING.md** before opening a Pull Request.
+
+---
+
+## 📄 License
+
+Apache 2.0
