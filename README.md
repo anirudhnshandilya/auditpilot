@@ -2,7 +2,7 @@
 
 > Open-source AI-powered ISO/IEC 27001 readiness assistant for security and GRC teams.
 
-AuditPilot helps organisations prepare for security audits by validating risk registers, asset registers, and supporting documentation. It combines deterministic validation with AI-assisted analysis to identify gaps, improve evidence quality, and generate actionable remediation recommendations.
+AuditPilot helps organisations prepare for security audits by validating risk registers, asset registers, and supporting documentation. It combines deterministic validation with AI-assisted analysis to identify gaps, improve evidence quality, and generate actionable remediation recommendations. By automating the tedious process of manual evidence verification, AuditPilot transforms audit preparation from a stressful annual scramble into a continuous, self-correcting workflow.
 
 > 🚧 **Status:** Early development (v0.1.0-alpha)
 
