@@ -112,7 +112,7 @@ uv run mypy app
 
 | Name | Role | Focus |
 |------|------|-------|
-| Anirudh Shandilya | Project Lead | Security, GRC, Backend |
+| Anirudh Shandilya | Cybersecurity | Security, GRC, Backend |
 | Suryakiran Suresh | AI & Data Science | ML, NLP, AI Models |
 
 ## 🤝 Contributing
