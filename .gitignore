@@ -216,3 +216,30 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Python virtual environments
+backend/.venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Testing & tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment variables
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Keep template env files
+!.env.example
