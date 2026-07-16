@@ -1,6 +1,8 @@
 from fastapi import APIRouter, HTTPException
 
+from app.frameworks.coverage_service import CoverageService
 from app.frameworks.service import FrameworkService
+from app.services.evidence_service import evidence_repository
 
 router = APIRouter(prefix="/frameworks", tags=["Frameworks"])
 
@@ -20,6 +22,25 @@ def list_iso27001_controls() -> list[dict[str, object]]:
         }
         for control in controls
     ]
+
+
+@router.get("/iso27001/coverage")
+def get_iso27001_coverage() -> dict[str, object]:
+    documents = [
+        evidence
+        for _, evidence in evidence_repository.list()
+    ]
+
+    coverage = CoverageService.analyse(documents)
+
+    return {
+        "total_controls": coverage.total_controls,
+        "covered_controls": coverage.covered_controls,
+        "uncovered_controls": coverage.uncovered_controls,
+        "coverage_percentage": coverage.coverage_percentage,
+        "covered_control_ids": coverage.covered_control_ids,
+        "uncovered_control_ids": coverage.uncovered_control_ids,
+    }
 
 
 @router.get("/iso27001/{control_id}")

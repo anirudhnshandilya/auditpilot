@@ -1,6 +1,10 @@
 from fastapi.testclient import TestClient
 
 from app.main import app
+from io import BytesIO
+
+from app.services.evidence_service import evidence_repository
+
 
 client = TestClient(app)
 
@@ -34,3 +38,50 @@ def test_get_unknown_control_returns_404() -> None:
 
     assert response.status_code == 404
     assert response.json() == {"detail": "Control not found."}
+
+def setup_function() -> None:
+    evidence_repository._documents.clear()
+
+
+def test_iso27001_coverage_with_no_evidence() -> None:
+    response = client.get("/frameworks/iso27001/coverage")
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["total_controls"] == 2
+    assert body["covered_controls"] == 0
+    assert body["uncovered_controls"] == 2
+    assert body["coverage_percentage"] == 0.0
+    assert body["covered_control_ids"] == []
+    assert body["uncovered_control_ids"] == ["A.5.1", "A.5.2"]
+
+
+def test_iso27001_coverage_after_policy_upload() -> None:
+    upload_response = client.post(
+        "/evidence/upload",
+        files={
+            "file": (
+                "policy.txt",
+                BytesIO(
+                    b"Information Security Policy Version 1.0 "
+                    b"Approved by the CISO after policy review."
+                ),
+                "text/plain",
+            )
+        },
+    )
+
+    assert upload_response.status_code == 200
+
+    response = client.get("/frameworks/iso27001/coverage")
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["covered_controls"] == 1
+    assert body["coverage_percentage"] == 50.0
+    assert body["covered_control_ids"] == ["A.5.1"]
+    assert body["uncovered_control_ids"] == ["A.5.2"]
