@@ -8,6 +8,8 @@ dependencies = [
     "fastapi",
     "openpyxl>=3.1.5",
     "pandas>=3.0.3",
+    "pymupdf>=1.28.0",
+    "python-docx>=1.2.0",
     "python-multipart>=0.0.32",
     "uvicorn[standard]",
 ]
