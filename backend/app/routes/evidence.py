@@ -27,6 +27,12 @@ def serialize_evidence(
         "processing_status": evidence.processing_status,
         "evidence_status": evidence.evidence_status,
         "extracted_text_length": len(evidence.extracted_text),
+        "page_count": evidence.page_count,
+        "word_count": evidence.word_count,
+        "character_count": evidence.character_count,
+        "author": evidence.author,
+        "document_created_at": evidence.document_created_at,
+        "document_modified_at": evidence.document_modified_at,
     }
 
 

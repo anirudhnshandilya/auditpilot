@@ -43,3 +43,9 @@ class EvidenceDocument:
     processing_status: ProcessingStatus
     evidence_status: EvidenceStatus
     extracted_text: str = ""
+    page_count: int | None = None
+    word_count: int = 0
+    character_count: int = 0
+    author: str | None = None
+    document_created_at: str | None = None
+    document_modified_at: str | None = None

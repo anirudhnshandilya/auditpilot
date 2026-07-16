@@ -1,8 +1,7 @@
 import hashlib
 from datetime import UTC, datetime
-from app.services.evidence_repository import EvidenceRepository
-from app.services.document_classifier import DocumentClassifier
 
+from app.services.document_classifier import DocumentClassifier
 from app.services.document_parser import DocumentParser
 from app.services.evidence_models import (
     DocumentType,
@@ -10,6 +9,8 @@ from app.services.evidence_models import (
     EvidenceStatus,
     ProcessingStatus,
 )
+from app.services.evidence_repository import EvidenceRepository
+from app.services.metadata_extractor import MetadataExtractor
 
 
 class EvidenceService:
@@ -24,15 +25,29 @@ class EvidenceService:
 
         try:
             extracted_text = DocumentParser.parse(filename, contents)
+
             if document_type == DocumentType.UNKNOWN:
                 document_type = DocumentClassifier.classify(
                     filename=filename,
                     extracted_text=extracted_text,
-    )
+                )
+
+            metadata = MetadataExtractor.extract(
+                filename=filename,
+                contents=contents,
+                extracted_text=extracted_text,
+            )
+
             processing_status = ProcessingStatus.PROCESSED
             evidence_status = EvidenceStatus.PRESENT
+
         except (ValueError, UnicodeDecodeError):
             extracted_text = ""
+            metadata = MetadataExtractor.extract(
+                filename="unknown.txt",
+                contents=b"",
+                extracted_text="",
+            )
             processing_status = ProcessingStatus.FAILED
             evidence_status = EvidenceStatus.INVALID
 
@@ -46,6 +61,13 @@ class EvidenceService:
             processing_status=processing_status,
             evidence_status=evidence_status,
             extracted_text=extracted_text,
+            page_count=metadata.page_count,
+            word_count=metadata.word_count,
+            character_count=metadata.character_count,
+            author=metadata.author,
+            document_created_at=metadata.created_at,
+            document_modified_at=metadata.modified_at,
         )
+
 
 evidence_repository = EvidenceRepository()
