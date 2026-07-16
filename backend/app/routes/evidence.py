@@ -6,6 +6,7 @@ from fastapi import APIRouter, File, HTTPException, UploadFile
 from app.services.evidence_models import DocumentType, EvidenceDocument
 from app.services.evidence_service import EvidenceService, evidence_repository
 from app.services.evidence_summary import EvidenceSummaryService
+from app.frameworks.mapper import ControlMapper
 
 router = APIRouter(prefix="/evidence", tags=["Evidence"])
 
@@ -17,7 +18,12 @@ def serialize_evidence(
     document_id: UUID,
     evidence: EvidenceDocument,
 ) -> dict[str, object]:
-    return {
+   control_mappings = ControlMapper.map_text(
+        evidence.extracted_text
+    )
+   
+   return {
+
         "id": str(document_id),
         "filename": evidence.filename,
         "document_type": evidence.document_type,
@@ -34,6 +40,14 @@ def serialize_evidence(
         "author": evidence.author,
         "document_created_at": evidence.document_created_at,
         "document_modified_at": evidence.document_modified_at,
+        "control_mappings": [
+            {
+                "control_id": mapping.control_id,
+                "confidence": mapping.confidence,
+                "matched_keywords": mapping.matched_keywords,
+            }
+            for mapping in control_mappings
+        ],
     }
 
 
