@@ -1,71 +1,161 @@
 # 🛡️ AuditPilot
 
-> Open-source AI-powered ISO/IEC 27001 readiness assistant for security and GRC teams.
+> **Open-source AI-powered compliance platform for ISO/IEC 27001 readiness, evidence management, and security governance.**
 
-AuditPilot helps organisations prepare for security audits by validating risk registers, asset registers, and supporting documentation. It combines deterministic validation with AI-assisted analysis to identify gaps, improve evidence quality, and generate actionable remediation recommendations. By automating the tedious process of manual evidence verification, AuditPilot transforms audit preparation from a stressful annual scramble into a continuous, self-correcting workflow
+AuditPilot helps organisations prepare for security audits by validating risk registers, analysing supporting documentation, identifying compliance gaps, and generating actionable remediation recommendations.
 
-> 🚧 **Status:** Early development (v0.1.0-alpha)
+By combining deterministic validation with AI-assisted analysis, AuditPilot transforms audit preparation from a stressful annual exercise into a continuous, self-correcting compliance workflow.
 
 ---
 
-## ✨ Features
+# 🚧 Project Status
 
-### Current
+**Current Version:** `v0.2.0-alpha`
+
+### Phase Progress
+
+- ✅ Phase 1 – Backend Foundation
+- ✅ Phase 2 – Validation Engine
+- 🚧 Phase 3 – Evidence Manager
+- ⏳ Phase 4 – AI Copilot
+- ⏳ Phase 5 – Framework Packs
+
+---
+
+# ✨ Current Features
+
+## Backend
+
 - ✅ FastAPI backend
-- ✅ Interactive Swagger API documentation
-- ✅ Upload Risk Register (CSV/XLSX)
-- ✅ File parsing with Pandas
-- ✅ Automated testing with Pytest
-- ✅ Linting with Ruff
-- ✅ Type checking with MyPy
-
-### Coming Soon
-- 🔄 Risk Register validation engine
-- 🔄 Asset Register upload
-- 🔄 CAPA recommendation generator
-- 🔄 ISO 27001 evidence mapping
-- 🔄 AI-powered policy analysis
-- 🔄 Executive audit readiness reports
-- 🔄 React dashboard
+- ✅ Interactive Swagger API
+- ✅ RESTful upload endpoint
+- ✅ CSV/XLSX parsing
 
 ---
 
-## 🏗️ Project Architecture
+## Validation Engine
+
+- ✅ Modular Validation Engine
+- ✅ Rule Registry
+- ✅ Rule Runner
+- ✅ Severity Model
+- ✅ Audit Readiness Scoring
+- ✅ Validation Result Model
+
+---
+
+## Risk Register Validation
+
+Currently supports validation for:
+
+- ✅ Duplicate Risk IDs
+- ✅ Empty Risk IDs
+- ✅ Duplicate Rows
+- ✅ Empty Rows
+- ✅ Missing Required Columns
+- ✅ Missing Owner
+- ✅ Missing Title
+- ✅ Missing Description
+- ✅ Missing Treatment Plan
+- ✅ Missing Review Date
+- ✅ Invalid Review Date
+- ✅ Past Due Review Date
+- ✅ Invalid Likelihood
+- ✅ Invalid Impact
+
+---
+
+## Quality
+
+- ✅ 20 Automated Tests
+- ✅ Ruff Linting
+- ✅ MyPy Static Type Checking
+- ✅ Type-safe Validation Models
+
+---
+
+# 🚀 Coming Soon
+
+## Phase 3
+
+- 🚧 Evidence Manager
+- 🚧 PDF Parser
+- 🚧 DOCX Parser
+- 🚧 Evidence Metadata
+- 🚧 Document Classification
+- 🚧 Evidence Status Tracking
+
+## Phase 4
+
+- ⏳ ISO 27001 Evidence Mapping
+- ⏳ AI Policy Review
+- ⏳ CAPA Recommendation Engine
+- ⏳ Executive Audit Reports
+
+## Phase 5
+
+- ⏳ React Dashboard
+- ⏳ User Authentication
+- ⏳ Multi-Framework Support
+- ⏳ Continuous Compliance Monitoring
+
+---
+
+# 🏗️ Architecture
 
 ```
 AuditPilot
 │
-├── backend          # FastAPI API
-├── frontend         # React UI (coming soon)
-├── docs             # Architecture & roadmap
-├── examples         # Sample datasets
-└── tests            # Automated tests
+├── backend
+│   ├── app
+│   │   ├── routes
+│   │   ├── services
+│   │   ├── validators
+│   │   │   ├── engine.py
+│   │   │   ├── registry.py
+│   │   │   ├── runner.py
+│   │   │   ├── severity.py
+│   │   │   └── rules
+│   │   └── main.py
+│   │
+│   ├── tests
+│   └── pyproject.toml
+│
+├── frontend        (Coming Soon)
+├── docs
+├── examples
+└── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+# 🚀 Getting Started
 
-### Clone
+## Clone
 
 ```bash
 git clone https://github.com/anirudhnshandilya/auditpilot.git
+
 cd auditpilot/backend
 ```
 
-### Install
+---
+
+## Install
 
 ```bash
 uv sync
 ```
 
-### Run
+---
+
+## Run
 
 ```bash
 uv run uvicorn app.main:app --reload
 ```
 
-Visit:
+Open:
 
 ```
 http://127.0.0.1:8000/docs
@@ -73,69 +163,182 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## 📌 Roadmap
+# 🧪 Testing
 
-### v0.1
-- [x] FastAPI backend
-- [x] Health endpoints
-- [x] Risk Register upload
-- [ ] Upload validation
-- [ ] CSV/XLSX parser
-
-### v0.2
-- [ ] Validation engine
-- [ ] Asset Register support
-- [ ] Findings report
-
-### v0.3
-- [ ] CAPA recommendations
-- [ ] Dashboard
-- [ ] Authentication
-
-### v0.4
-- [ ] AI-powered evidence extraction
-- [ ] ISO 27001 control mapping
-- [ ] Audit readiness scoring
-
----
-
-## 🧪 Testing
+Run the complete quality suite:
 
 ```bash
 uv run pytest
+
 uv run ruff check .
+
 uv run mypy app
 ```
 
+Current Status
+
+```
+✅ 20 Passing Tests
+
+✅ Ruff Clean
+
+✅ MyPy Clean
+```
+
 ---
-## 👥 Maintainers
+
+# 🛠️ Technology Stack
+
+## Backend
+
+- Python 3.12
+- FastAPI
+- Pandas
+- PyMuPDF
+- python-docx
+
+## Testing
+
+- Pytest
+- MyPy
+- Ruff
+
+## Planned
+
+- React
+- PostgreSQL
+- OpenAI API
+- Docker
+- GitHub Actions
+
+---
+
+# 📌 Roadmap
+
+## ✅ Phase 1 — Backend Foundation
+
+- FastAPI Backend
+- Health API
+- Swagger Documentation
+- Project Structure
+
+---
+
+## ✅ Phase 2 — Validation Engine
+
+- Upload API
+- Rule Engine
+- Rule Registry
+- Rule Runner
+- Risk Register Validation
+- Severity Model
+- Audit Readiness Score
+- Automated Testing
+
+---
+
+## 🚧 Phase 3 — Evidence Manager
+
+- PDF Upload
+- DOCX Upload
+- Document Parsing
+- Evidence Metadata
+- Evidence Classification
+- Evidence Status Engine
+
+---
+
+## ⏳ Phase 4 — AI Compliance
+
+- ISO 27001 Mapping
+- Policy Analysis
+- CAPA Recommendations
+- AI Evidence Review
+
+---
+
+## ⏳ Phase 5 — Platform
+
+- Dashboard
+- Authentication
+- Multi-Framework Support
+- Executive Reports
+- Continuous Compliance
+
+---
+
+# 👥 Maintainers
 
 | Name | Role | Focus |
-|------|------|-------|
-| Anirudh Shandilya | Cybersecurity | Security, GRC, Backend |
-| Suryakiran Suresh | AI & Data Science | ML, NLP, AI Models |
+|------|------|------|
+| **Anirudh Shandilya** | Cybersecurity Engineer | Security, GRC, Backend Architecture |
+| **Suryakiran Suresh** | AI & Data Science | Machine Learning, NLP, AI Models |
 
-## 🤝 Contributing
+---
+
+# 🤝 Contributing
 
 Contributions are welcome!
 
-If you'd like to improve AuditPilot:
+To contribute:
 
 1. Fork the repository
 2. Create a feature branch
+
+```bash
+git checkout -b feature/my-feature
+```
+
 3. Commit your changes
-4. Open a Pull Request
 
-Please read the `CONTRIBUTING.md` before submitting a PR.
+```bash
+git commit -m "feat: add amazing feature"
+```
+
+4. Push
+
+```bash
+git push origin feature/my-feature
+```
+
+5. Open a Pull Request
+
+Please read **CONTRIBUTING.md** before submitting changes.
 
 ---
 
-## 📄 License
+# 📄 License
 
-Licensed under the Apache 2.0 License.
+Licensed under the **Apache License 2.0**.
 
 ---
 
-## ⭐ Support the Project
+# 🌟 Vision
 
-If you find AuditPilot useful, consider giving it a ⭐ on GitHub. It helps the project reach more security professionals and encourages further development.
+AuditPilot aims to become an open-source compliance platform supporting multiple governance and security frameworks, including:
+
+- ISO/IEC 27001
+- ISO/IEC 27002
+- ISO/IEC 42001
+- NIST CSF
+- CIS Controls
+- SOC 2
+- CSA CCM
+- DORA
+- NIS2
+
+Through modular validation engines, AI-assisted evidence analysis, and continuous compliance workflows, AuditPilot seeks to make audit readiness faster, more transparent, and accessible to organisations of all sizes.
+
+---
+
+# ⭐ Support the Project
+
+If you find AuditPilot useful:
+
+- ⭐ Star the repository
+- 🍴 Fork the project
+- 🛠️ Contribute improvements
+- 🐛 Report issues
+- 💬 Share feedback
+
+Your support helps grow the project and the open-source security community.
