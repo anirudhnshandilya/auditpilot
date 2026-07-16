@@ -1,6 +1,7 @@
 import hashlib
 from datetime import UTC, datetime
 from app.services.evidence_repository import EvidenceRepository
+from app.services.document_classifier import DocumentClassifier
 
 from app.services.document_parser import DocumentParser
 from app.services.evidence_models import (
@@ -23,6 +24,11 @@ class EvidenceService:
 
         try:
             extracted_text = DocumentParser.parse(filename, contents)
+            if document_type == DocumentType.UNKNOWN:
+                document_type = DocumentClassifier.classify(
+                    filename=filename,
+                    extracted_text=extracted_text,
+    )
             processing_status = ProcessingStatus.PROCESSED
             evidence_status = EvidenceStatus.PRESENT
         except (ValueError, UnicodeDecodeError):

@@ -32,3 +32,15 @@ def test_process_invalid_document() -> None:
     assert evidence.processing_status == ProcessingStatus.FAILED
     assert evidence.evidence_status == EvidenceStatus.INVALID
     assert evidence.extracted_text == ""
+
+def test_process_auto_classifies_document() -> None:
+    evidence = EvidenceService.process(
+        filename="risk-register.csv",
+        contents=(
+            b"Risk ID,Likelihood,Impact,Risk Owner\n"
+            b"R001,4,5,Security Team\n"
+        ),
+        mime_type="text/csv",
+    )
+
+    assert evidence.document_type == DocumentType.RISK_REGISTER
