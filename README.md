@@ -4,124 +4,192 @@
 
 AuditPilot helps organisations prepare for security audits by validating risk registers, analysing supporting documentation, identifying compliance gaps, and generating actionable remediation recommendations.
 
-By combining deterministic validation with AI-assisted analysis, AuditPilot transforms audit preparation from a stressful annual exercise into a continuous, self-correcting compliance workflow.
+By combining deterministic validation with AI-assisted analysis, AuditPilot transforms audit preparation from a stressful annual exercise into a continuous, evidence-driven compliance workflow.
 
 ---
 
-# 🚧 Project Status
+## 🚧 Project Status
 
-**Current Version:** `v0.2.0-alpha`
+**Current Version:** `v0.3.0-alpha`
 
 ### Phase Progress
 
 - ✅ Phase 1 – Backend Foundation
 - ✅ Phase 2 – Validation Engine
-- 🚧 Phase 3 – Evidence Manager
-- ⏳ Phase 4 – AI Copilot
-- ⏳ Phase 5 – Framework Packs
+- ✅ Phase 3 – Evidence Intelligence Pipeline
+- 🚧 Phase 4 – Compliance Framework Engine
+- ⏳ Phase 5 – CAPA and Ticket Generation
+- ⏳ Phase 6 – AI Compliance Copilot
+- ⏳ Phase 7 – Dashboard and Reporting
 
 ---
 
-# ✨ Current Features
+## ✨ Current Features
 
-## Backend
+### Backend
 
 - ✅ FastAPI backend
-- ✅ Interactive Swagger API
-- ✅ RESTful upload endpoint
-- ✅ CSV/XLSX parsing
+- ✅ Interactive Swagger API documentation
+- ✅ RESTful API architecture
+- ✅ CSV and XLSX processing
+- ✅ PDF, DOCX and TXT parsing
+- ✅ Modular service structure
 
----
+### Risk Register Validation
 
-## Validation Engine
-
-- ✅ Modular Validation Engine
-- ✅ Rule Registry
-- ✅ Rule Runner
-- ✅ Severity Model
-- ✅ Audit Readiness Scoring
-- ✅ Validation Result Model
-
----
-
-## Risk Register Validation
-
-Currently supports validation for:
+AuditPilot currently detects:
 
 - ✅ Duplicate Risk IDs
 - ✅ Empty Risk IDs
-- ✅ Duplicate Rows
-- ✅ Empty Rows
-- ✅ Missing Required Columns
-- ✅ Missing Owner
-- ✅ Missing Title
-- ✅ Missing Description
-- ✅ Missing Treatment Plan
-- ✅ Missing Review Date
-- ✅ Invalid Review Date
-- ✅ Past Due Review Date
-- ✅ Invalid Likelihood
-- ✅ Invalid Impact
+- ✅ Duplicate rows
+- ✅ Empty rows
+- ✅ Missing required columns
+- ✅ Missing owners
+- ✅ Missing titles
+- ✅ Missing descriptions
+- ✅ Missing treatment plans
+- ✅ Missing review dates
+- ✅ Invalid review dates
+- ✅ Past-due review dates
+- ✅ Invalid likelihood values
+- ✅ Invalid impact values
+
+### Validation Engine
+
+- ✅ Modular validation engine
+- ✅ Validation rule interface
+- ✅ Rule registry
+- ✅ Rule runner
+- ✅ Severity model
+- ✅ Validation result model
+- ✅ Audit-readiness scoring
+- ✅ Type-safe findings
+
+### Evidence Manager
+
+- ✅ Multi-format evidence upload
+- ✅ PDF text extraction
+- ✅ DOCX text extraction
+- ✅ TXT parsing
+- ✅ CSV parsing
+- ✅ XLSX parsing
+- ✅ SHA-256 checksum generation
+- ✅ UUID-based evidence identifiers
+- ✅ Evidence repository
+- ✅ List evidence
+- ✅ Retrieve evidence by ID
+- ✅ Delete evidence
+
+### Document Classification
+
+AuditPilot can automatically classify uploaded documents as:
+
+- ✅ Policy
+- ✅ Procedure
+- ✅ Risk Register
+- ✅ Asset Register
+- ✅ Incident Register
+- ✅ Audit Report
+- ✅ Training Record
+- ✅ Unknown
+
+### Metadata Extraction
+
+AuditPilot extracts:
+
+- ✅ File size
+- ✅ MIME type
+- ✅ Upload timestamp
+- ✅ SHA-256 checksum
+- ✅ Page count
+- ✅ Word count
+- ✅ Character count
+- ✅ Author metadata
+- ✅ Document creation date
+- ✅ Document modification date
+
+### Evidence Status Engine
+
+AuditPilot currently detects:
+
+- ✅ Draft documents
+- ✅ Missing approval information
+- ✅ Missing version information
+- ✅ Invalid documents
+- ✅ Documents requiring human review
+- ✅ Sufficient evidence
+
+### Evidence Insights
+
+- ✅ Evidence summary endpoint
+- ✅ Total evidence count
+- ✅ Sufficient evidence count
+- ✅ Human-review-required count
+- ✅ Invalid evidence count
+- ✅ Document-type breakdown
+- ✅ Common evidence issues
 
 ---
 
-## Quality
+## 🧪 Quality
 
-- ✅ 20 Automated Tests
-- ✅ Ruff Linting
-- ✅ MyPy Static Type Checking
-- ✅ Type-safe Validation Models
+- ✅ 49 automated tests
+- ✅ Pytest test suite
+- ✅ Ruff linting
+- ✅ MyPy static type checking
+- ✅ Type-safe models and services
+- ✅ Feature-branch development
+- ✅ Pull-request workflow
+- ✅ Conventional commit messages
 
----
+Current quality status:
 
-# 🚀 Coming Soon
-
-## Phase 3
-
-- 🚧 Evidence Manager
-- 🚧 PDF Parser
-- 🚧 DOCX Parser
-- 🚧 Evidence Metadata
-- 🚧 Document Classification
-- 🚧 Evidence Status Tracking
-
-## Phase 4
-
-- ⏳ ISO 27001 Evidence Mapping
-- ⏳ AI Policy Review
-- ⏳ CAPA Recommendation Engine
-- ⏳ Executive Audit Reports
-
-## Phase 5
-
-- ⏳ React Dashboard
-- ⏳ User Authentication
-- ⏳ Multi-Framework Support
-- ⏳ Continuous Compliance Monitoring
-
----
-
-# 🏗️ Architecture
-
+```text
+49 tests passing
+MyPy clean
+Ruff clean
 ```
+
+---
+
+## 🏗️ Architecture
+
+```text
 AuditPilot
 │
 ├── backend
 │   ├── app
+│   │   ├── api
+│   │   ├── core
 │   │   ├── routes
+│   │   │   ├── upload.py
+│   │   │   └── evidence.py
+│   │   │
 │   │   ├── services
+│   │   │   ├── document_parser.py
+│   │   │   ├── document_classifier.py
+│   │   │   ├── metadata_extractor.py
+│   │   │   ├── evidence_models.py
+│   │   │   ├── evidence_repository.py
+│   │   │   ├── evidence_service.py
+│   │   │   ├── evidence_status_engine.py
+│   │   │   └── evidence_summary.py
+│   │   │
 │   │   ├── validators
 │   │   │   ├── engine.py
 │   │   │   ├── registry.py
 │   │   │   ├── runner.py
 │   │   │   ├── severity.py
+│   │   │   ├── models.py
 │   │   │   └── rules
+│   │   │
 │   │   └── main.py
 │   │
 │   ├── tests
-│   └── pyproject.toml
+│   ├── pyproject.toml
+│   └── uv.lock
 │
-├── frontend        (Coming Soon)
+├── frontend
 ├── docs
 ├── examples
 └── README.md
@@ -129,209 +197,407 @@ AuditPilot
 
 ---
 
-# 🚀 Getting Started
+## 🔄 Core Workflow
 
-## Clone
-
-```bash
-git clone https://github.com/anirudhnshandilya/auditpilot.git
-
-cd auditpilot/backend
+```text
+Upload Evidence
+      ↓
+File Validation
+      ↓
+Document Parsing
+      ↓
+Automatic Classification
+      ↓
+Metadata Extraction
+      ↓
+Evidence Status Evaluation
+      ↓
+Evidence Repository
+      ↓
+Evidence Summary
+      ↓
+Framework Mapping
+      ↓
+Gap Analysis
+      ↓
+CAPA and Ticket Generation
 ```
 
 ---
 
-## Install
+## 🚀 Getting Started
+
+### Clone the repository
+
+```bash
+git clone https://github.com/anirudhnshandilya/auditpilot.git
+cd auditpilot/backend
+```
+
+### Install dependencies
 
 ```bash
 uv sync
 ```
 
----
-
-## Run
+### Run the API
 
 ```bash
 uv run uvicorn app.main:app --reload
 ```
 
-Open:
+Open the Swagger interface:
 
-```
+```text
 http://127.0.0.1:8000/docs
 ```
 
 ---
 
-# 🧪 Testing
+## 📡 Current API Endpoints
 
-Run the complete quality suite:
+### Health
 
-```bash
-uv run pytest
-
-uv run ruff check .
-
-uv run mypy app
+```text
+GET /
+GET /health
 ```
 
-Current Status
+### Risk Register
 
+```text
+POST /upload/risk-register
 ```
-✅ 20 Passing Tests
 
-✅ Ruff Clean
+### Evidence Manager
 
-✅ MyPy Clean
+```text
+POST   /evidence/upload
+GET    /evidence
+GET    /evidence/summary
+GET    /evidence/{document_id}
+DELETE /evidence/{document_id}
 ```
 
 ---
 
-# 🛠️ Technology Stack
+## 🧪 Testing
 
-## Backend
+Run the full test suite:
+
+```bash
+uv run pytest
+```
+
+Run type checking:
+
+```bash
+uv run mypy app
+```
+
+Run linting:
+
+```bash
+uv run ruff check .
+```
+
+Run the complete quality gate:
+
+```bash
+uv run pytest
+uv run mypy app
+uv run ruff check .
+```
+
+---
+
+## 🛠️ Technology Stack
+
+### Backend
 
 - Python 3.12
 - FastAPI
 - Pandas
 - PyMuPDF
 - python-docx
+- OpenPyXL
+- Pydantic
+- Uvicorn
 
-## Testing
+### Testing and Quality
 
 - Pytest
 - MyPy
 - Ruff
+- pandas-stubs
 
-## Planned
+### Planned
 
-- React
 - PostgreSQL
-- OpenAI API
+- SQLAlchemy
+- Alembic
+- Redis
+- React
+- TypeScript
 - Docker
 - GitHub Actions
+- OpenAI-compatible LLM providers
+- Local LLM support
+- Vector search
+- RAG
 
 ---
 
-# 📌 Roadmap
+## 📌 Roadmap
 
-## ✅ Phase 1 — Backend Foundation
+### ✅ Phase 1 — Backend Foundation
 
-- FastAPI Backend
-- Health API
-- Swagger Documentation
-- Project Structure
+- FastAPI backend
+- Health endpoints
+- Swagger documentation
+- Project structure
+- Dependency management
+- Initial automated testing
 
----
+### ✅ Phase 2 — Validation Engine
 
-## ✅ Phase 2 — Validation Engine
+- Risk Register upload
+- CSV/XLSX processing
+- Validation rule interface
+- Rule registry
+- Rule runner
+- Severity model
+- Risk Register validation rules
+- Audit-readiness scoring
+- Automated validation tests
 
-- Upload API
-- Rule Engine
-- Rule Registry
-- Rule Runner
-- Risk Register Validation
-- Severity Model
-- Audit Readiness Score
-- Automated Testing
+### ✅ Phase 3 — Evidence Intelligence Pipeline
 
----
+#### Part A — Evidence Upload Foundation
 
-## 🚧 Phase 3 — Evidence Manager
+- PDF upload
+- DOCX upload
+- TXT upload
+- CSV upload
+- XLSX upload
+- Document parser
+- Evidence service
 
-- PDF Upload
-- DOCX Upload
-- Document Parsing
-- Evidence Metadata
-- Evidence Classification
-- Evidence Status Engine
+#### Part B — Evidence Repository
 
----
+- UUID-based identifiers
+- Store evidence
+- List evidence
+- Retrieve evidence
+- Delete evidence
 
-## ⏳ Phase 4 — AI Compliance
+#### Part C — Document Classification
 
-- ISO 27001 Mapping
-- Policy Analysis
-- CAPA Recommendations
-- AI Evidence Review
+- Automatic document classification
+- Policy detection
+- Procedure detection
+- Risk Register detection
+- Asset Register detection
+- Incident Register detection
+- Audit Report detection
+- Training Record detection
 
----
+#### Part D — Metadata Extraction
 
-## ⏳ Phase 5 — Platform
+- Page count
+- Word count
+- Character count
+- Author
+- Creation date
+- Modification date
+- Checksum
 
-- Dashboard
-- Authentication
-- Multi-Framework Support
-- Executive Reports
-- Continuous Compliance
+#### Part E — Evidence Status Engine
 
----
+- Draft detection
+- Approval detection
+- Version detection
+- Human-review status
+- Sufficient evidence status
 
-# 👥 Maintainers
+#### Part F — Evidence Insights
 
-| Name | Role | Focus |
-|------|------|------|
-| **Anirudh Shandilya** | Cybersecurity Engineer | Security, GRC, Backend Architecture |
-| **Suryakiran Suresh** | AI & Data Science | Machine Learning, NLP, AI Models |
+- Evidence summary
+- Document-type distribution
+- Evidence-status distribution
+- Common issue detection
 
----
+### 🚧 Phase 4 — Compliance Framework Engine
 
-# 🤝 Contributing
-
-Contributions are welcome!
-
-To contribute:
-
-1. Fork the repository
-2. Create a feature branch
-
-```bash
-git checkout -b feature/my-feature
-```
-
-3. Commit your changes
-
-```bash
-git commit -m "feat: add amazing feature"
-```
-
-4. Push
-
-```bash
-git push origin feature/my-feature
-```
-
-5. Open a Pull Request
-
-Please read **CONTRIBUTING.md** before submitting changes.
-
----
-
-# 📄 License
-
-Licensed under the **Apache License 2.0**.
-
----
-
-# 🌟 Vision
-
-AuditPilot aims to become an open-source compliance platform supporting multiple governance and security frameworks, including:
+Planned support:
 
 - ISO/IEC 27001
 - ISO/IEC 27002
 - ISO/IEC 42001
-- NIST CSF
+- NIST Cybersecurity Framework
 - CIS Controls
 - SOC 2
 - CSA CCM
 - DORA
 - NIS2
 
-Through modular validation engines, AI-assisted evidence analysis, and continuous compliance workflows, AuditPilot seeks to make audit readiness faster, more transparent, and accessible to organisations of all sizes.
+Planned capabilities:
+
+- Framework plugin architecture
+- Control libraries
+- Evidence-to-control mapping
+- Control coverage analysis
+- Compliance gap detection
+- Framework scoring
+- Cross-framework mapping
+
+### ⏳ Phase 5 — CAPA and Ticket Engine
+
+- Corrective action generation
+- Preventive action generation
+- Root-cause tracking
+- Priority assignment
+- Due-date recommendations
+- Required-evidence recommendations
+- GitHub Issues integration
+- Jira integration
+- Azure DevOps integration
+- ServiceNow integration
+
+### ⏳ Phase 6 — AI Compliance Copilot
+
+- Policy analysis
+- Evidence extraction
+- Control mapping
+- Gap explanations
+- CAPA recommendations
+- Audit Q&A
+- Executive summaries
+- RAG-based evidence search
+- Local and hosted LLM support
+- Prompt-injection safeguards
+
+### ⏳ Phase 7 — Dashboard and Reporting
+
+- React dashboard
+- Framework readiness scores
+- Evidence coverage
+- Findings by severity
+- Open CAPAs
+- Overdue actions
+- Risk distribution
+- Executive summaries
+- PDF reports
+- DOCX reports
+- XLSX reports
 
 ---
 
-# ⭐ Support the Project
+## 🌟 Vision
+
+AuditPilot aims to become an open-source compliance operating system for:
+
+- Security compliance
+- Risk management
+- Evidence management
+- Audit readiness
+- Remediation tracking
+- AI governance
+- Continuous compliance
+
+The long-term workflow is:
+
+```text
+Gap detected
+      ↓
+Explain why it matters
+      ↓
+Map to framework controls
+      ↓
+Generate CAPA
+      ↓
+Create remediation ticket
+      ↓
+Recommend required evidence
+      ↓
+Track until closure
+```
+
+Most compliance tools stop at identifying a gap.
+
+AuditPilot aims to support the full remediation lifecycle.
+
+---
+
+## 👥 Maintainers
+
+| Name | Role | Focus |
+|---|---|---|
+| **Anirudh Shandilya** | Project Lead and Cybersecurity Engineer | Security, GRC, backend architecture and open-source management |
+| **Suryakiran Suresh** | AI and Data Science Contributor | Machine learning, NLP, AI models and analytics |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome.
+
+To contribute:
+
+1. Fork the repository.
+2. Create a feature branch.
+
+```bash
+git checkout -b feature/my-feature
+```
+
+3. Commit your changes.
+
+```bash
+git commit -m "feat: add new capability"
+```
+
+4. Push your branch.
+
+```bash
+git push origin feature/my-feature
+```
+
+5. Open a pull request.
+
+Please read `CONTRIBUTING.md` before submitting changes.
+
+Areas where contributors can help:
+
+- FastAPI
+- React
+- AI and NLP
+- ISO/IEC 27001
+- ISO/IEC 42001
+- NIST CSF
+- SOC 2
+- Cloud security
+- DevOps
+- Testing
+- Documentation
+
+---
+
+## 🔐 Security
+
+Please report security vulnerabilities according to the guidance in `SECURITY.md`.
+
+Do not disclose vulnerabilities through public GitHub issues.
+
+---
+
+## 📄 License
+
+AuditPilot is licensed under the **Apache License 2.0**.
+
+---
+
+## ⭐ Support the Project
 
 If you find AuditPilot useful:
 
@@ -341,4 +607,4 @@ If you find AuditPilot useful:
 - 🐛 Report issues
 - 💬 Share feedback
 
-Your support helps grow the project and the open-source security community.
+Your support helps AuditPilot reach more security professionals, GRC practitioners, engineers, auditors and open-source contributors.
