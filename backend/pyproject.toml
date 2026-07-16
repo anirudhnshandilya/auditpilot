@@ -20,6 +20,7 @@ testpaths = ["tests"]
 dev = [
     "httpx>=0.28.1",
     "mypy>=2.3.0",
+    "pandas-stubs>=3.0.3.260530",
     "pytest>=9.1.1",
     "ruff>=0.15.21",
 ]
