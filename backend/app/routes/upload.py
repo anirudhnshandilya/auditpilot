@@ -4,6 +4,8 @@ from pathlib import Path
 import pandas as pd
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
+from app.validators.engine import ValidationEngine
+
 router = APIRouter(prefix="/upload", tags=["Upload"])
 
 ALLOWED_EXTENSIONS = {".csv", ".xlsx"}
@@ -48,10 +50,25 @@ async def upload_risk_register(
             detail="The uploaded file could not be parsed.",
         ) from exc
 
+    validation_engine = ValidationEngine()
+    validation_result = validation_engine.validate(dataframe)
+
     return {
         "filename": filename,
-        "status": "uploaded",
+        "status": "validated",
         "rows": len(dataframe),
         "columns": len(dataframe.columns),
         "column_names": dataframe.columns.astype(str).tolist(),
+        "score": validation_result.score,
+        "audit_readiness": validation_result.audit_readiness,
+        "findings": [
+            {
+                "severity": finding.severity,
+                "row": finding.row,
+                "column": finding.column,
+                "message": finding.message,
+                "recommendation": finding.recommendation,
+            }
+            for finding in validation_result.findings
+        ],
     }
