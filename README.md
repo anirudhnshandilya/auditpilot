@@ -1,4 +1,4 @@
-# 🛡️ AuditPilot
+# 🛡️ AuditPilo
 
 > **Open-source AI-powered compliance platform for ISO/IEC 27001 readiness, evidence management, and security governance.**
 
