@@ -17,7 +17,10 @@ def test_process_valid_text_document() -> None:
     assert evidence.filename == "policy.txt"
     assert evidence.document_type == DocumentType.POLICY
     assert evidence.processing_status == ProcessingStatus.PROCESSED
-    assert evidence.evidence_status == EvidenceStatus.PRESENT
+    assert (
+    evidence.evidence_status
+    == EvidenceStatus.HUMAN_REVIEW_REQUIRED
+)
     assert evidence.extracted_text == "Information Security Policy"
     assert len(evidence.checksum) == 64
 

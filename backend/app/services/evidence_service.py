@@ -11,7 +11,7 @@ from app.services.evidence_models import (
 )
 from app.services.evidence_repository import EvidenceRepository
 from app.services.metadata_extractor import MetadataExtractor
-
+from app.services.evidence_status_engine import EvidenceStatusEngine
 
 class EvidenceService:
     @staticmethod
@@ -39,7 +39,8 @@ class EvidenceService:
             )
 
             processing_status = ProcessingStatus.PROCESSED
-            evidence_status = EvidenceStatus.PRESENT
+            status_result = EvidenceStatusEngine.evaluate(extracted_text)
+            evidence_status = status_result.status
 
         except (ValueError, UnicodeDecodeError):
             extracted_text = ""
