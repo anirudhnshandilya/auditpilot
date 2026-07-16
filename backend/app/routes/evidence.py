@@ -5,6 +5,7 @@ from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from app.services.evidence_models import DocumentType, EvidenceDocument
 from app.services.evidence_service import EvidenceService, evidence_repository
+from app.services.evidence_summary import EvidenceSummaryService
 
 router = APIRouter(prefix="/evidence", tags=["Evidence"])
 
@@ -89,6 +90,23 @@ def list_evidence() -> list[dict[str, object]]:
         for document_id, evidence in evidence_repository.list()
     ]
 
+@router.get("/summary")
+def get_evidence_summary() -> dict[str, object]:
+    documents = [
+        evidence
+        for _, evidence in evidence_repository.list()
+    ]
+
+    summary = EvidenceSummaryService.summarize(documents)
+
+    return {
+        "total_documents": summary.total_documents,
+        "sufficient_documents": summary.sufficient_documents,
+        "review_required_documents": summary.review_required_documents,
+        "invalid_documents": summary.invalid_documents,
+        "document_types": summary.document_types,
+        "common_issues": summary.common_issues,
+    }
 
 @router.get("/{document_id}")
 def get_evidence(document_id: UUID) -> dict[str, object]:
