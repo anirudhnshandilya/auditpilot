@@ -85,3 +85,45 @@ def test_iso27001_coverage_after_policy_upload() -> None:
     assert body["coverage_percentage"] == 50.0
     assert body["covered_control_ids"] == ["A.5.1"]
     assert body["uncovered_control_ids"] == ["A.5.2"]
+
+def test_iso27001_gaps_with_no_evidence() -> None:
+    response = client.get("/frameworks/iso27001/gaps")
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert len(body) == 2
+    assert body[0]["control_id"] == "A.5.1"
+    assert body[1]["control_id"] == "A.5.2"
+
+
+def test_iso27001_gaps_after_policy_upload() -> None:
+    upload_response = client.post(
+        "/evidence/upload",
+        files={
+            "file": (
+                "policy.txt",
+                BytesIO(
+                    b"Information Security Policy Version 1.0 "
+                    b"Approved by the CISO after policy review."
+                ),
+                "text/plain",
+            )
+        },
+    )
+
+    assert upload_response.status_code == 200
+
+    response = client.get("/frameworks/iso27001/gaps")
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert len(body) == 1
+    assert body[0]["control_id"] == "A.5.2"
+    assert (
+        body[0]["control_title"]
+        == "Information security roles and responsibilities"
+    )

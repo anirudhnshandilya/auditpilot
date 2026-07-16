@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException
 from app.frameworks.coverage_service import CoverageService
 from app.frameworks.service import FrameworkService
 from app.services.evidence_service import evidence_repository
+from app.frameworks.gap_service import GapService
 
 router = APIRouter(prefix="/frameworks", tags=["Frameworks"])
 
@@ -42,6 +43,25 @@ def get_iso27001_coverage() -> dict[str, object]:
         "uncovered_control_ids": coverage.uncovered_control_ids,
     }
 
+@router.get("/iso27001/gaps")
+def get_iso27001_gaps() -> list[dict[str, object]]:
+    documents = [
+        evidence
+        for _, evidence in evidence_repository.list()
+    ]
+
+    gaps = GapService.detect(documents)
+
+    return [
+        {
+            "control_id": gap.control_id,
+            "control_title": gap.control_title,
+            "expected_evidence": gap.expected_evidence,
+            "severity": gap.severity,
+            "recommendation": gap.recommendation,
+        }
+        for gap in gaps
+    ]
 
 @router.get("/iso27001/{control_id}")
 def get_iso27001_control(control_id: str) -> dict[str, object]:
