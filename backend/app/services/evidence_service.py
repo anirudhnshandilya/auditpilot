@@ -1,5 +1,6 @@
 import hashlib
 from datetime import UTC, datetime
+from app.services.evidence_repository import EvidenceRepository
 
 from app.services.document_parser import DocumentParser
 from app.services.evidence_models import (
@@ -40,3 +41,5 @@ class EvidenceService:
             evidence_status=evidence_status,
             extracted_text=extracted_text,
         )
+
+evidence_repository = EvidenceRepository()
