@@ -1,14 +1,33 @@
 from pathlib import Path
+from uuid import UUID
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
-from app.services.evidence_models import DocumentType
-from app.services.evidence_service import EvidenceService
+from app.services.evidence_models import DocumentType, EvidenceDocument
+from app.services.evidence_service import EvidenceService, evidence_repository
 
 router = APIRouter(prefix="/evidence", tags=["Evidence"])
 
 ALLOWED_EXTENSIONS = {".pdf", ".docx", ".txt", ".csv", ".xlsx"}
 MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024
+
+
+def serialize_evidence(
+    document_id: UUID,
+    evidence: EvidenceDocument,
+) -> dict[str, object]:
+    return {
+        "id": str(document_id),
+        "filename": evidence.filename,
+        "document_type": evidence.document_type,
+        "mime_type": evidence.mime_type,
+        "size_bytes": evidence.size_bytes,
+        "checksum": evidence.checksum,
+        "uploaded_at": evidence.uploaded_at.isoformat(),
+        "processing_status": evidence.processing_status,
+        "evidence_status": evidence.evidence_status,
+        "extracted_text_length": len(evidence.extracted_text),
+    }
 
 
 @router.post("/upload")
@@ -52,14 +71,40 @@ async def upload_evidence(
             detail="The uploaded document could not be processed.",
         )
 
-    return {
-        "filename": evidence.filename,
-        "document_type": evidence.document_type,
-        "mime_type": evidence.mime_type,
-        "size_bytes": evidence.size_bytes,
-        "checksum": evidence.checksum,
-        "uploaded_at": evidence.uploaded_at.isoformat(),
-        "processing_status": evidence.processing_status,
-        "evidence_status": evidence.evidence_status,
-        "extracted_text_length": len(evidence.extracted_text),
-    }
+    document_id = evidence_repository.add(evidence)
+
+    return serialize_evidence(document_id, evidence)
+
+
+@router.get("")
+def list_evidence() -> list[dict[str, object]]:
+    return [
+        serialize_evidence(document_id, evidence)
+        for document_id, evidence in evidence_repository.list()
+    ]
+
+
+@router.get("/{document_id}")
+def get_evidence(document_id: UUID) -> dict[str, object]:
+    evidence = evidence_repository.get(document_id)
+
+    if evidence is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Evidence document not found.",
+        )
+
+    return serialize_evidence(document_id, evidence)
+
+
+@router.delete("/{document_id}")
+def delete_evidence(document_id: UUID) -> dict[str, str]:
+    deleted = evidence_repository.delete(document_id)
+
+    if not deleted:
+        raise HTTPException(
+            status_code=404,
+            detail="Evidence document not found.",
+        )
+
+    return {"status": "deleted"}
