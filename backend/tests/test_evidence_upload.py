@@ -25,7 +25,7 @@ def test_upload_text_document() -> None:
 
     assert body["filename"] == "policy.txt"
     assert body["processing_status"] == "Processed"
-    assert body["evidence_status"] == "Present"
+    assert body["evidence_status"] == "Human review required"
     assert body["extracted_text_length"] > 0
 
 
