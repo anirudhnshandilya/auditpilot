@@ -127,3 +127,46 @@ def test_iso27001_gaps_after_policy_upload() -> None:
         body[0]["control_title"]
         == "Information security roles and responsibilities"
     )
+
+def test_iso27001_score_with_no_evidence() -> None:
+    response = client.get("/frameworks/iso27001/score")
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["score"] == 0
+    assert body["rating"] == "Poor"
+    assert body["covered_controls"] == 0
+    assert body["uncovered_controls"] == 2
+    assert body["coverage_percentage"] == 0.0
+
+
+def test_iso27001_score_after_policy_upload() -> None:
+    upload_response = client.post(
+        "/evidence/upload",
+        files={
+            "file": (
+                "policy.txt",
+                BytesIO(
+                    b"Information Security Policy Version 1.0 "
+                    b"Approved by the CISO after policy review."
+                ),
+                "text/plain",
+            )
+        },
+    )
+
+    assert upload_response.status_code == 200
+
+    response = client.get("/frameworks/iso27001/score")
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["score"] == 50
+    assert body["rating"] == "Needs Improvement"
+    assert body["covered_controls"] == 1
+    assert body["uncovered_controls"] == 1
+    assert body["coverage_percentage"] == 50.0

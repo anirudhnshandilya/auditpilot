@@ -4,6 +4,7 @@ from app.frameworks.coverage_service import CoverageService
 from app.frameworks.service import FrameworkService
 from app.services.evidence_service import evidence_repository
 from app.frameworks.gap_service import GapService
+from app.frameworks.scoring_service import ScoringService
 
 router = APIRouter(prefix="/frameworks", tags=["Frameworks"])
 
@@ -41,6 +42,23 @@ def get_iso27001_coverage() -> dict[str, object]:
         "coverage_percentage": coverage.coverage_percentage,
         "covered_control_ids": coverage.covered_control_ids,
         "uncovered_control_ids": coverage.uncovered_control_ids,
+    }
+
+@router.get("/iso27001/score")
+def get_iso27001_score() -> dict[str, object]:
+    documents = [
+        evidence
+        for _, evidence in evidence_repository.list()
+    ]
+
+    score = ScoringService.calculate(documents)
+
+    return {
+        "score": score.score,
+        "rating": score.rating,
+        "covered_controls": score.covered_controls,
+        "uncovered_controls": score.uncovered_controls,
+        "coverage_percentage": score.coverage_percentage,
     }
 
 @router.get("/iso27001/gaps")
