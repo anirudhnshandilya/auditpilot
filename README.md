@@ -17,7 +17,7 @@ By combining deterministic validation with AI-assisted analysis, AuditPilot tran
 - ✅ Phase 1 – Backend Foundation
 - ✅ Phase 2 – Validation Engine
 - ✅ Phase 3 – Evidence Intelligence Pipeline
-- 🚧 Phase 4 – Compliance Framework Engine
+- ✅ Phase 4 – Compliance Framework Engine
 - ⏳ Phase 5 – CAPA and Ticket Generation
 - ⏳ Phase 6 – AI Compliance Copilot
 - ⏳ Phase 7 – Dashboard and Reporting
@@ -427,7 +427,7 @@ uv run ruff check .
 - Evidence-status distribution
 - Common issue detection
 
-### 🚧 Phase 4 — Compliance Framework Engine
+### ✅ Phase 4 — Compliance Framework Engine
 
 Planned support:
 
