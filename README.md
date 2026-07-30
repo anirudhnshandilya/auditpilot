@@ -755,8 +755,8 @@ AuditPilot aims to support the entire remediation lifecycle.
 
 | Name | Role | Focus |
 |---|---|---|
-| **Anirudh N Shandilya** | Project Lead and Cybersecurity Engineer | Security, GRC, backend architecture and open-source project management |
-| **Suryakiran Suresh** | AI and Data Science Contributor | Machine learning, NLP, analytics and AI model development |
+| **Anirudh N Shandilya** | Project Co-Lead and Cybersecurity Engineer | Security, GRC, backend architecture and open-source project management |
+| **Suryakiran Suresh** | Project Co-Lead and AI and Data Science Contributor | Machine learning, NLP, analytics and AI model development |
 
 ---
 
